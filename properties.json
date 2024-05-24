@@ -1,0 +1,52 @@
+[
+  {
+    "address": "1131 Foothill St, Redwood City, CA 94061, USA",
+    "body": {
+      "zpid": 0,
+      "property_link": "https://www.redfin.com/CA/Redwood-City/1131-Foothill-St-94061/home/1898252",
+      "address": "1131 Foothill St, Redwood City, CA 94061",
+      "sale_price": 1880000,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "living_area": 1460,
+      "property_tax_rate": 1.1,
+      "hoa": 0,
+      "insurance": 501,
+      "year_built": 1953,
+      "property_type": "SingleFamily",
+      "market_value": 1948859,
+      "rent_estimate": 6378,
+      "rent_median": 6000,
+      "rent_min": 4500,
+      "rent_max": 9875,
+      "average_daily_rate": 460,
+      "occupancy_rate": 59,
+      "projected_revenue": 99100
+    }
+  },
+  {
+    "address": "12214 Estelle Ln, Pinehurst, TX 77362, USA",
+    "body": {
+      "zpid": 0,
+      "property_link": "https://www.redfin.com/TX/Pinehurst/12214-Estelle-Ln-77362/home/32609904",
+      "address": "12214 Estelle Ln, Pinehurst, TX 77362",
+      "sale_price": 255000,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "living_area": 1630,
+      "property_tax_rate": 1.6,
+      "hoa": 46,
+      "insurance": 187,
+      "year_built": 2019,
+      "property_type": "SingleFamily",
+      "market_value": 252259,
+      "rent_estimate": 2386,
+      "rent_median": 2450,
+      "rent_min": 2100,
+      "rent_max": 2700,
+      "average_daily_rate": 161,
+      "occupancy_rate": 66,
+      "projected_revenue": 38900
+    }
+  }
+]

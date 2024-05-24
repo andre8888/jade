@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: MyString
+  latitude: 9.99
+  longitude: 9.99
+  bedrooms: 9.99
+  baths: 9.99
+  building_type: MyString
+  zillow_mean: 9.99
+  mean: 9.99
+  median: 9.99
+  min: 9.99
+  max: 9.99
+  percentile_25: 9.99
+  percentile_75: 9.99
+  std_dev: 9.99
+  rentometer_token: MyString
+  rentometer_quickview_url: MyString
+  rentometer_pro_report_url: MyString
+  rentometer_nearby_comps_url: MyString
+
+two:
+  address: MyString
+  latitude: 9.99
+  longitude: 9.99
+  bedrooms: 9.99
+  baths: 9.99
+  building_type: MyString
+  zillow_mean: 9.99
+  mean: 9.99
+  median: 9.99
+  min: 9.99
+  max: 9.99
+  percentile_25: 9.99
+  percentile_75: 9.99
+  std_dev: 9.99
+  rentometer_token: MyString
+  rentometer_quickview_url: MyString
+  rentometer_pro_report_url: MyString
+  rentometer_nearby_comps_url: MyString
