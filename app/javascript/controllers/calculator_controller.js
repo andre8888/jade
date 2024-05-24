@@ -298,13 +298,16 @@ export default class extends Controller {
     }
 
     handleLodging() {
-        this.booking_lodging_feesTarget.value = 1 // default for str
+        this.booking_lodging_feesTarget.value = 3 // default for str
         if (this.market_type === this.MARKET_TYPE.long_term) {
             this.booking_lodging_feesTarget.value = 0
         }
     }
 
     handleMonthlySuppliesAndUtilities() {
+        // default for str
+        this.monthly_suppliesTarget.value = 200
+        this.monthly_utilitiesTarget.value = 250
         if (this.market_type === this.MARKET_TYPE.long_term) {
             // default for ltr
             this.monthly_suppliesTarget.value = 0
