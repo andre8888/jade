@@ -1,5 +1,6 @@
 %div{data: {controller: 'calculator'}}
   = form_for @calculator, url: run_calculator_path, method: :post, html: {data: {'calculator-target': 'form'}} do |f|
+    = f.hidden_field :map_key, value: "#{Rails.application.credentials.google[:places_api_key]}", data: {'calculator-target': 'places_api_key'}
     = render partial: 'layouts/error_messages', locals: {errors: @calculator.errors}
 
     %div.strategy-section

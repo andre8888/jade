@@ -7,6 +7,7 @@ import pluralize from 'pluralize'
 export default class extends Controller {
     static targets = [
         'form',
+        'places_api_key',
         'market_strategy',
         'str',
         'ltr',
@@ -107,7 +108,7 @@ export default class extends Controller {
 
     initGoogleAutoComplete() {
         const loader = new Loader({
-            apiKey: 'AIzaSyAp8nZQP34cE47BGtS3gHp_sz6UxTCNS5A',
+            apiKey: this.places_api_keyTarget.value,
             version: 'weekly',
             libraries: ['core', 'maps', 'places', 'geometry', 'geocoding']
         });
@@ -334,7 +335,6 @@ export default class extends Controller {
         this.monthly_insurance = parseInt(this.annual_insuranceTarget.value || 0)
         this.monthly_hoa = parseInt(this.monthly_hoaTarget.value || 0)
         this.monthly_booking = ((this.booking_lodging_feesTarget.value || 0) / 100) * rent
-        console.log('monthly_booking: ', this.monthly_booking)
         this.monthly_supplies = this.market_type === this.MARKET_TYPE.long_term ? 0 : parseInt(this.monthly_suppliesTarget.value || 0)
         this.monthly_utilities = parseInt(this.monthly_utilitiesTarget.value || 0)
         this.monthly_expenses = this.monthly_mortgage +
