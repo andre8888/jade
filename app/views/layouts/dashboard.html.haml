@@ -1,0 +1,76 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Jade
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  %body.bg-gray-100.font-family-karla.flex
+    %aside.relative.bg-sidebar.h-screen.w-80.hidden.sm:block.shadow-xl
+      .p-6
+        %div.text-white.text-3xl.font-semibold
+          = t("company")
+      %nav.text-white.text-base.font-semibold.pt-3
+        %a.flex.items-center.text-white.opacity-75.hover:opacity-100.py-4.pl-6.nav-item{href: new_property_path}
+          %i.fas.fa-house.mr-3
+          = t("menu_sidebar.search_property")
+        %a.flex.items-center.text-white.opacity-75.hover:opacity-100.py-4.pl-6.nav-item{href: new_neighborhood_path}
+          %i.fas.fa-location-crosshairs.mr-3
+          = t("menu_sidebar.search_neighborhood")
+      %a.absolute.w-full.upgrade-btn.bottom-0.active-nav-link.text-white.flex.items-center.justify-center.py-4{:href => "#"}
+        %i.fas.fa-arrow-circle-up.mr-3
+        = t("upgrade_to_pro")
+    .w-full.flex.flex-col.h-screen.overflow-y-hidden
+      / Desktop Header
+      %header.w-full.items-center.bg-white.py-2.px-6.hidden.sm:flex
+        %div{:class => "w-1/2"}
+        .relative.flex.justify-end{:class => "w-1/2", "x-data" => "{ isOpen: false }"}
+          %button.realtive.z-10.w-12.h-12.rounded-full.overflow-hidden.border-4.border-gray-400.hover:border-gray-300.focus:border-gray-300.focus:outline-none{"@click" => "isOpen = !isOpen"}
+            %i.fas.fa-user
+          %button.h-full.w-full.fixed.inset-0.cursor-default{"@click" => "isOpen = false", "x-show" => "isOpen"}
+          .absolute.w-32.bg-white.rounded-lg.shadow-lg.py-2.mt-16{"x-show" => "isOpen"}
+            %a.block.px-4.py-2.account-link.hover:text-white{href: edit_account_path}
+              = t("menu_settings.account")
+            %a.block.px-4.py-2.account-link.hover:text-white{href: support_path}
+              = t("menu_settings.support")
+            %a.block.px-4.py-2.account-link.hover:text-white
+              = t("menu_settings.sign_out")
+      / Mobile Header & Nav
+      %header.w-full.bg-sidebar.py-5.px-6.sm:hidden{"x-data" => "{ isOpen: false }"}
+        .flex.items-center.justify-between
+          %div.text-white.text-3xl.font-semibold.uppercase.hover:text-gray-300
+            = t("company")
+          %button.text-white.text-3xl.focus:outline-none{"@click" => "isOpen = !isOpen"}
+            %i.fas.fa-bars{"x-show" => "!isOpen"}
+            %i.fas.fa-times{"x-show" => "isOpen"}
+        / Dropdown Nav
+        %nav.flex.flex-col.pt-4{":class" => "isOpen ? 'flex': 'hidden'"}
+          %a.flex.items-center.active-nav-link.text-white.py-2.pl-4.nav-item{href: new_property_path}
+            %i.fas.fa-house.mr-3
+            = t("menu_sidebar.search_property")
+          %a.flex.items-center.active-nav-link.text-white.py-2.pl-4.nav-item{href: new_neighborhood_path}
+            %i.fas.fa-location-crosshairs.mr-3
+            = t("menu_sidebar.search_neighborhood")
+          %a.flex.items-center.text-white.opacity-75.hover:opacity-100.py-2.pl-4.nav-item{href: support_path}
+            %i.fas.fa-cogs.mr-3
+            = t("menu_settings.support")
+          %a.flex.items-center.text-white.opacity-75.hover:opacity-100.py-2.pl-4.nav-item{href: edit_account_path}
+            %i.fas.fa-user.mr-3
+            = t("menu_settings.account")
+          %a.flex.items-center.text-white.opacity-75.hover:opacity-100.py-2.pl-4.nav-item{href: "#"}
+            %i.fas.fa-sign-out-alt.mr-3
+            = t("menu_settings.sign_out")
+          %button.w-full.bg-white.cta-btn.font-semibold.py-2.mt-3.rounded-lg.shadow-lg.hover:shadow-xl.hover:bg-gray-300.flex.items-center.justify-center
+            %i.fas.fa-arrow-circle-up.mr-3
+            = t("upgrade_to_pro")
+
+      .w-full.h-screen.overflow-x-hidden.border-t.flex.flex-col
+        %main.w-full.flex-grow.px-10.pt-6.pb-12
+          = yield
+
+        = render 'layouts/footer'

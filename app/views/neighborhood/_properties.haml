@@ -1,0 +1,30 @@
+%h1.text-3xl.text-black= pluralize(properties.count, 'property')
+%h2.text-slate-500= "near #{filter.location}"
+.mx-auto.w-full.mt-3
+  .mx-auto
+    .bg-white.overflow-auto
+      %table.min-w-full.bg-white.properties#testing
+        %thead.bg-gray-800.text-white
+          %tr
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm{:class => "w-1/3"} Address
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm Beds
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm Baths
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm Area
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm Price
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm Cash Flow
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm CoC
+            %th.text-left.py-3.px-4.uppercase.font-semibold.text-sm
+        %tbody.text-gray-700
+          - properties.each_with_index do |property, index|
+            %tr{class: index % 2 == 0 ? '' : 'bg-gray-200'}
+              %td.text-left.py-3.px-4.truncate{:class => "w-1/3"}
+                %a.hover:text-blue-500{href: property.zillow_url, target: '_blank'}= property.address.to_s
+              %td.text-left.py-3.px-4= property.num_beds
+              %td.text-left.py-3.px-4= property.num_baths
+              %td.text-left.py-3.px-4= "#{property.living_area.round}sq"
+              %td.text-left.py-3.px-4= "$#{property.sale_price.round}"
+              %td.text-left.py-3.px-4 $X/month
+              %td.text-left.py-3.px-4 0%
+              %td.text-left.py-3.px-4
+                %a.hover:text-blue-500{href: new_property_path}
+                  %i.fas.fa-magnifying-glass-chart.mr-3

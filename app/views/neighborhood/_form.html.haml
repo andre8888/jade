@@ -1,0 +1,11 @@
+%div{data: {controller: 'neighborhood'}}
+  = form_for :neighborhood, url: search_neighborhood_path, method: :post, html: {data: {'neighborhood-target': 'form', turbo_frame: 'properties'}} do |f|
+    = f.hidden_field :map_key, value: "#{Rails.application.credentials.google[:places_api_key]}", data: {'neighborhood-target': 'places_api_key'}
+    = f.hidden_field :market_strategy, value: 'str'
+    -# = render partial: 'layouts/error_messages', locals: {errors: @neighborhood.errors}
+    = render partial: 'search', locals: {form: f}
+    .my-8
+      = f.submit 'Search'
+    = render partial: 'layouts/skeleton'
+  #properties
+    %template

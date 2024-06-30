@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  property_type: 1
+  property_tax_rate: 1.5
+  num_beds: 9.99
+  num_baths: 9.99
+  year_built: 1
+  living_area: 9.99
+  lot_area: 9.99
+  sale_price: 9.99
+  sale_estimate: 9.99
+  monthly_hoa: 9.99
+  monthly_insurance: 9.99
+  zillow_id: MyString
+  zillow_url: MyString
+
+two:
+  property_type: 1
+  property_tax_rate: 1.5
+  num_beds: 9.99
+  num_baths: 9.99
+  year_built: 1
+  living_area: 9.99
+  lot_area: 9.99
+  sale_price: 9.99
+  sale_estimate: 9.99
+  monthly_hoa: 9.99
+  monthly_insurance: 9.99
+  zillow_id: MyString
+  zillow_url: MyString

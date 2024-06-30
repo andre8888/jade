@@ -1,0 +1,21 @@
+= form.fields_for :address do |f|
+  %div.addr-section
+    .fields
+      .col-span-full
+        = f.label :street1, 'Street address'
+        .mt-2
+          = f.text_field :street1, class: 'w-full', data: {'property-target': 'street1'}
+    .property-details.hidden
+      .fields
+        .sm:col-span-1.sm:col-start-1
+          = f.label :market_value, '', data: {'property-target': 'market_value'}
+        .sm:col-span-1
+          = f.label :year_built, '', data: {'property-target': 'year_built'}
+        .sm:col-span-1
+          = f.label :bedroom, '', data: {'property-target': 'bedroom'}
+        .sm:col-span-1
+          = f.label :bathroom, '', data: {'property-target': 'bathroom'}
+        .sm:col-span-1
+          = f.label :living_area, '', data: {'property-target': 'living_area'}
+        .sm:col-span-1
+          = link_to 'Property Listing', '#', target: '_blank', data: {'property-target': 'property_link'}

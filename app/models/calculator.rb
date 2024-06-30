@@ -1,49 +1,45 @@
+require 'httparty'
+require 'puppeteer-ruby'
+
 class Calculator
-  include ActiveModel::Model
+	include ActiveModel::Model
+	include ScrapeHelper
 
-  attr_accessor :address,
-                :market_strategy,
-                :sale_price,
-                :down_payment,
-                :loan_amount,
-                :interest_rate,
-                :loan_length,
-                :monthly_mortgage,
-                :closing_cost,
-                :rehab_cost,
-                :furniture_cost,
-                :initial_cash_investment,
-                :avg_daily_rate,
-                :occupancy_rate,
-                :est_monthly_rent,
-                :maintenance,
-                :property_tax,
-                :annual_insurance,
-                :property_management_fees,
-                :monthly_hoa,
-                :booking_lodging_fees,
-                :monthly_supplies,
-                :monthly_utilities,
-                :monthly_expenses,
-                :monthly_cash_flow,
-                :coc_return,
-                :year_1_debt_paydown,
-                :appreciation,
-                :annualized_roi
+	# accessor get method
+	attr_reader :property_types, :min_sq, :max_sq, :min_price, :max_price,
+							:min_beds, :max_beds, :min_baths, :max_baths
 
-  validate :check_address
+	# accessor set method
+	attr_writer :property_types, :min_sq, :max_sq, :min_price, :max_price,
+							:min_beds, :max_beds, :min_baths, :max_baths
 
-  def check_address
-    unless address.valid?
-      errors.add(:address, 'must be complete')
-    end
-  end
+	def initialize(
+		property_types: nil,
+		min_sq: nil,
+		max_sq: nil,
+		min_price: nil,
+		max_price: nil,
+		min_beds: nil,
+		max_beds: nil,
+		min_baths: nil,
+		max_baths: nil)
+		@logger = Logger.new(STDOUT)
+		@logger.level = @debug? Logger::DEBUG : Logger::INFO
 
-  def run
-    street1 = address.street1
-    city = address.city
-    state = address.state
-    zipcode = address.zipcode
-    country = address.country
-  end
+		@property_types = property_types
+		@min_sq = min_sq
+		@max_sq = max_sq
+		@min_price = min_price
+		@max_price = max_price
+		@min_beds = min_beds
+		@max_beds = max_beds
+		@min_baths = min_baths
+		@max_baths = max_baths
+	end
+
+	def scrape_rent
+
+	rescue StandardError => e
+		puts "HTTP Request failed (#{ e.message })"
+	end
 end

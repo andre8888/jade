@@ -10,12 +10,47 @@ class Airdna
   AIRDNA_URL = 'https://app.airdna.co'
   EMAIL = Rails.application.credentials.airdna[:email]
   PWD = Rails.application.credentials.airdna[:pwd]
+  USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36'
 
-  def initialize(debug = false)
+  RAPID_API_AIRDNA_HOST = 'airdna1.p.rapidapi.com'
+  RAPID_API_AIRDNA_TOKEN = Rails.application.credentials.rapid[:airdna_token]
+
+  def initialize(debug = false, use_api = false)
     @debug = debug
+    @use_api = use_api
+    @headers = {
+      'X-RapidAPI-Key' => RAPID_API_AIRDNA_TOKEN,
+      'X-RapidAPI-Host' => RAPID_API_AIRDNA_HOST
+    }
+    @logger = Logger.new(STDOUT)
+    @logger.level = @debug? Logger::DEBUG : Logger::INFO
   end
 
   def get_adr_rate(full_address, num_beds, num_baths)
+    num_beds = 6 if num_beds > 6
+    num_baths = 6 if num_baths > 6
+    num_guests = num_beds * 2
+    num_guests = 20 if num_guests > 20
+
+    if @use_api
+      url = "https://#{RAPID_API_AIRDNA_HOST}/rentalizer?address=#{CGI.escape(full_address)}&bedrooms=#{num_beds}&bathrooms=#{num_baths}&accommodates=#{num_guests}"
+      @logger.debug("get_adr_rate url: #{url}")
+      raw_response = HTTParty.get(url, headers: @headers)
+      response = JSON.parse(raw_response.body, symbolize_names: true)
+      @logger.debug("get_adr_rate response: #{response}")
+      raise RapidApiError.new('Bad response') if response.nil?
+
+      {
+        average_daily_rate: response[:data][:property_stats][:adr][:ltm].to_i,
+        occupancy: response[:data][:property_stats][:occupancy][:ltm].to_f * 100,
+        projected_revenue: response[:data][:property_stats][:revenue][:ltm].to_i
+      }
+    else
+      scrape(full_address, num_beds, num_baths, num_guests)
+    end
+  end
+
+  def scrape(full_address, num_beds, num_baths, num_guests)
     results = {}
 
     headless = !@debug
@@ -25,9 +60,10 @@ class Airdna
       page = browser.new_page
       page.viewport = Puppeteer::Viewport.new(width: 1280, height: 800)
       page.extra_http_headers = {'Accept-Language': 'en-US,en;q=0.9'}
-      page.set_user_agent(ScrapeHelper::USER_AGENT)
+      page.set_user_agent(USER_AGENT)
       page.goto("#{AIRDNA_URL}/data/login", wait_until: 'domcontentloaded')
       page.wait_for_selector('form.MuiBox-root', visible: true)
+      # page.screenshot(path: "url.png")
 
       form = page.query_selector('form.MuiBox-root')
       email_input = form.query_selector('input#login-email')
@@ -43,6 +79,13 @@ class Airdna
       # page.screenshot(path: "login.png")
 
       page.wait_for_selector('.MuiAutocomplete-root', visible: true)
+      market_selector = page.query_selector('.MuiBox-root > .MuiGrid-root .MuiGrid-root:nth-child(2) button')
+      market_selector.click
+      market_option = page.query_selector('.MuiBox-root > .MuiGrid-root .MuiGrid-root:nth-child(2) .MuiBox-root .MuiBox-root .MuiBox-root li:nth-child(2)')
+      market_option.click
+      page.wait_for_timeout 3000
+
+      page.wait_for_selector('.MuiAutocomplete-root', visible: true)
       search_input = page.query_selector('input.MuiAutocomplete-input')
       search_input.click
       page.keyboard.type_text(full_address)
@@ -53,11 +96,6 @@ class Airdna
         last_row.click
       end
       # page.screenshot(path: "search.png")
-
-      num_beds = 6 if num_beds > 6
-      num_baths = 6 if num_baths > 6
-      num_guests = num_beds * 2
-      num_guests = 20 if num_guests > 20
 
       # page.goto("#{AIRDNA_URL}/data/rentalizer?address=#{CGI.escape(full_address)}")
       page.wait_for_selector('[data-testid=BedOutlinedIcon]', visible: true)

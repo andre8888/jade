@@ -1,0 +1,51 @@
+= form.fields_for :search do |f|
+  .addr-section
+    .fields
+      .col-span-full
+        .mt-2
+          = f.text_field :location, class: 'w-full', placeholder: 'Start with a location...', data: {'neighborhood-target': 'location'}
+
+  .search-section
+    .fields.property-types
+      - options_for_property_types.each_with_index do |option, index|
+        .sm:col-span-1{class: ("sm:col-start-1" if index == 0)}
+          .mt-2
+            = f.check_box :property_types, { multiple: true }, option, false
+            = f.label :property_types, option
+    .fields
+      .sm:col-span-2.sm:col-start-1
+        = f.label :min_sq, 'Min Sq'
+        .mt-2
+          = f.number_field :min_sq
+          \sq
+      .sm:col-span-2
+        = f.label :max_sq, 'Max Sq'
+        .mt-2
+          = f.number_field :max_sq
+          \sq
+      .sm:col-span-2.sm:col-start-1
+        = f.label :min_price, 'Min Price'
+        .mt-2
+          \$
+          = f.number_field :min_price
+      .sm:col-span-2
+        = f.label :max_price, 'Max Price'
+        .mt-2
+          \$
+          = f.number_field :max_price
+      .sm:col-span-1.sm:col-start-1
+        = f.label :min_beds, 'Min Beds'
+        .mt-2
+          = f.select :min_beds, options_for_beds_baths, prompt: 'Select One'
+      .sm:col-span-1
+        = f.label :max_beds, 'Max Beds'
+        .mt-2
+          = f.select :max_beds, options_for_beds_baths, prompt: 'Select One'
+      .sm:col-span-1
+        = f.label :min_baths, 'Min Baths'
+        .mt-2
+          = f.select :min_baths, options_for_beds_baths, prompt: 'Select One'
+      .sm:col-span-1
+        = f.label :max_baths, 'Max Baths'
+        .mt-2
+          = f.select :max_baths, options_for_beds_baths, prompt: 'Select One'

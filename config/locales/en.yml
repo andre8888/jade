@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  company: "iVest"
+  footer:
+    disclaimer: "All right reserved"
+  menu_sidebar:
+    search_property: "Search Property"
+    search_neighborhood: "Search Neighborhood"
+  menu_settings:
+    account: "Account"
+    support: "Support"
+    sign_out: "Sign Out"
+  page_settings:
+    search_property: "Search by Property"
+    search_neighborhood: "Search by Neighborhood"
+    account: "Your Account"
+    support: "Support"
+  upgrade_to_pro: "Upgrade to Pro!"

@@ -200,7 +200,7 @@ class RapidApi
 	end
 
 	def get_adr_estimates(address, num_beds, num_baths)
-		airdna = Airdna.new(@debug)
+		airdna = Airdna.new(@debug, true)
 		adr_resp = airdna.get_adr_rate(address, num_beds, num_baths)
 		@logger.debug("airdna_response: #{adr_resp}")
 		raise RapidApiError.new('Bad response') if adr_resp.nil?

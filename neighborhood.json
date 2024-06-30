@@ -1,0 +1,202 @@
+{
+  "props": [
+    {
+      "dateSold": null,
+      "propertyType": "SINGLE_FAMILY",
+      "lotAreaValue": 0.41,
+      "address": "326 Oak Dr, Gatlinburg, TN 37738",
+      "variableData": {
+        "text": "6 days on Zillow",
+        "type": "DAYS_ON"
+      },
+      "priceChange": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/86bd0cbd418c91355e80b2234797e7ba-p_e.jpg",
+      "price": 369000,
+      "detailUrl": "/homedetails/326-Oak-Dr-Gatlinburg-TN-37738/81459497_zpid/",
+      "bedrooms": 3,
+      "contingentListingType": null,
+      "longitude": -83.47074,
+      "latitude": 35.730026,
+      "listingStatus": "FOR_SALE",
+      "zpid": "81459497",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": null,
+      "daysOnZillow": 6,
+      "bathrooms": 2,
+      "livingArea": 1836,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": "acres",
+      "hasImage": true
+    },
+    {
+      "dateSold": null,
+      "propertyType": "SINGLE_FAMILY",
+      "lotAreaValue": 0.59,
+      "address": "4812 Latta Way, Gatlinburg, TN 37738",
+      "variableData": {
+        "text": "$30,900 (Jun 13)",
+        "type": "PRICE_REDUCTION"
+      },
+      "priceChange": -30900,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/e315984b159983da85e39704a908540b-p_e.jpg",
+      "price": 249000,
+      "detailUrl": "/homedetails/4812-Latta-Way-Gatlinburg-TN-37738/42505939_zpid/",
+      "bedrooms": 2,
+      "contingentListingType": null,
+      "longitude": -83.30439,
+      "latitude": 35.76574,
+      "listingStatus": "FOR_SALE",
+      "zpid": "42505939",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": null,
+      "daysOnZillow": 28,
+      "bathrooms": 2,
+      "livingArea": 960,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": "acres",
+      "hasImage": true
+    },
+    {
+      "dateSold": null,
+      "propertyType": "SINGLE_FAMILY",
+      "lotAreaValue": 1,
+      "address": "2204 Grassy Branch Rd, Sevierville, TN 37876",
+      "variableData": {
+        "text": "$26,000 (Jun 10)",
+        "type": "PRICE_REDUCTION"
+      },
+      "priceChange": -26000,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/678219472da2d1ad0b35c73072ceb815-p_e.jpg",
+      "price": 299000,
+      "detailUrl": "/homedetails/2204-Grassy-Branch-Rd-Sevierville-TN-37876/42505033_zpid/",
+      "bedrooms": 2,
+      "contingentListingType": null,
+      "longitude": -83.43878,
+      "latitude": 35.762993,
+      "listingStatus": "FOR_SALE",
+      "zpid": "42505033",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": null,
+      "daysOnZillow": 304,
+      "bathrooms": 1,
+      "livingArea": 1030,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": "acres",
+      "hasImage": true
+    },
+    {
+      "dateSold": null,
+      "propertyType": "SINGLE_FAMILY",
+      "lotAreaValue": null,
+      "address": "453 Foothill Dr, Gatlinburg, TN 37738",
+      "variableData": {
+        "text": "$20,000 (May 17)",
+        "type": "PRICE_REDUCTION"
+      },
+      "priceChange": -20000,
+      "zestimate": 376700,
+      "imgSrc": "https://photos.zillowstatic.com/fp/8ba2b4d5e2bf72e99fd1406ecb014000-p_e.jpg",
+      "price": 399900,
+      "detailUrl": "/homedetails/453-Foothill-Dr-Gatlinburg-TN-37738/214911671_zpid/",
+      "bedrooms": 1,
+      "contingentListingType": null,
+      "longitude": -83.49709,
+      "latitude": 35.712193,
+      "listingStatus": "FOR_SALE",
+      "zpid": "214911671",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": 1279,
+      "daysOnZillow": 276,
+      "bathrooms": 1,
+      "livingArea": 600,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": null,
+      "hasImage": true
+    },
+    {
+      "dateSold": null,
+      "propertyType": "SINGLE_FAMILY",
+      "lotAreaValue": 0.5,
+      "address": "661 Turkey Nest Rd, Gatlinburg, TN 37738",
+      "variableData": {
+        "text": "110 days on Zillow",
+        "type": "DAYS_ON"
+      },
+      "priceChange": null,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/9d4c25013d0161d5ced75920ba884935-p_e.jpg",
+      "price": 399900,
+      "detailUrl": "/homedetails/661-Turkey-Nest-Rd-Gatlinburg-TN-37738/42514288_zpid/",
+      "bedrooms": 1,
+      "contingentListingType": null,
+      "longitude": -83.51017,
+      "latitude": 35.70382,
+      "listingStatus": "FOR_SALE",
+      "zpid": "42514288",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": null,
+      "daysOnZillow": 110,
+      "bathrooms": 1,
+      "livingArea": 676,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": "acres",
+      "hasImage": true
+    },
+    {
+      "dateSold": null,
+      "propertyType": "TOWNHOUSE",
+      "lotAreaValue": null,
+      "address": "3710 Weber Rd UNIT A102, Gatlinburg, TN 37738",
+      "unit": "Unit A102",
+      "variableData": {
+        "text": "$10,000 (Jun 18)",
+        "type": "PRICE_REDUCTION"
+      },
+      "priceChange": -10000,
+      "zestimate": null,
+      "imgSrc": "https://photos.zillowstatic.com/fp/f2bc90dae663356c7be1a799f4082239-p_e.jpg",
+      "price": 290000,
+      "detailUrl": "/homedetails/3710-Weber-Rd-UNIT-A102-Gatlinburg-TN-37738/2065248961_zpid/",
+      "bedrooms": 1,
+      "contingentListingType": null,
+      "longitude": -83.34945,
+      "latitude": 35.764202,
+      "listingStatus": "FOR_SALE",
+      "zpid": "2065248961",
+      "listingSubType": {
+        "is_FSBA": true
+      },
+      "rentZestimate": null,
+      "daysOnZillow": 26,
+      "bathrooms": 1,
+      "livingArea": 560,
+      "country": "USA",
+      "currency": "USD",
+      "lotAreaUnit": null,
+      "hasImage": true
+    }
+  ],
+  "resultsPerPage": 41,
+  "totalPages": 1,
+  "totalResultCount": 6,
+  "schools": {},
+  "currentPage": 1
+}

@@ -11,6 +11,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+                karla: ['Karla', ...defaultTheme.fontFamily.sans]
             },
             colors: {
                 purple: {

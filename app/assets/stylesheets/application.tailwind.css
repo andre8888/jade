@@ -1,10 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    a {
+    .font-family-karla {
+        @apply font-karla;
+    }
+
+    .bg-sidebar {
+        @apply bg-slate-800;
+    }
+
+    .cta-btn {
+        @apply bg-slate-800;
+    }
+
+    .upgrade-btn {
+        @apply bg-slate-900;
+    }
+
+    .upgrade-btn:hover {
+        @apply bg-slate-950;
+    }
+
+    .active-nav-link {
+        @apply bg-slate-900;
+    }
+
+    .nav-item:hover {
+        @apply bg-slate-900;
+    }
+
+    .account-link:hover {
+        @apply bg-slate-800;
+    }
+
+    main a {
         @apply text-indigo-600 hover:text-indigo-400
+    }
+
+    .property-types label {
+        @apply inline-flex;
     }
 
     .property-details label,
@@ -12,7 +50,7 @@
     .adr-details label,
     .property-details a,
     .rent-details a {
-        @apply !text-xs
+        @apply !text-sm
     }
 
     .property-details a, .rent-details a {
@@ -23,14 +61,14 @@
         @apply bg-slate-100;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] input[type='text'].dynamic,
-    [data-controller=calculator] [data-calculator-target=form] input[type='number'].dynamic {
+    form input[type='text'].dynamic,
+    form input[type='number'].dynamic {
         @apply border-dotted;
         @apply border-2;
         @apply border-slate-950;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] label {
+    form label {
         @apply block;
         @apply text-sm;
         @apply font-medium;
@@ -38,8 +76,10 @@
         @apply text-gray-900;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] input[type='text'],
-    [data-controller=calculator] [data-calculator-target=form] input[type='number'] {
+    form input[type='text'],
+    form input[type='number'],
+    form input[type='checkbox'],
+    form select {
         @apply rounded-md;
         @apply border-0;
         @apply text-gray-900;
@@ -55,24 +95,25 @@
         @apply sm:leading-8;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] input[type='submit'] {
+    form input[type='submit'] {
         @apply rounded-full;
-        @apply bg-white;
+        @apply bg-slate-700;
         @apply px-8;
         @apply py-4;
         @apply text-sm;
+        @apply text-white;
         @apply font-bold;
         @apply shadow-lg;
         @apply uppercase;
         @apply tracking-wider;
-        @apply hover:bg-slate-100;
+        @apply hover:bg-slate-500;
         @apply focus-visible:outline;
         @apply focus-visible:outline-2;
         @apply focus-visible:outline-offset-2;
         @apply focus-visible:outline-indigo-600;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] .metrics {
+    [data-controller=property] [data-property-target=form] .metrics {
         @apply mt-8;
         @apply border-gray-600;
         @apply rounded-md;
@@ -83,22 +124,24 @@
         @apply to-slate-300;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] .metrics h2 {
+    [data-controller=property] [data-property-target=form] .metrics h2 {
         @apply text-base;
         @apply font-semibold;
         @apply leading-7;
         @apply text-gray-900;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] .calc-section,
-    [data-controller=calculator] [data-calculator-target=form] .addr-section,
-    [data-controller=calculator] [data-calculator-target=form] .strategy-section {
+    form .calc-section,
+    form .addr-section,
+    form .strategy-section,
+    form .search-section {
         @apply mt-8;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] .calc-section h2,
-    [data-controller=calculator] [data-calculator-target=form] .addr-section h2,
-    [data-controller=calculator] [data-calculator-target=form] .strategy-section h2 {
+    form .calc-section h2,
+    form .addr-section h2,
+    form .strategy-section h2,
+    form .search-section h2 {
         @apply border-gray-600;
         @apply rounded-md;
         @apply px-3;
@@ -112,7 +155,7 @@
         @apply text-gray-900;
     }
 
-    [data-controller=calculator] [data-calculator-target=form] .fields {
+    form .fields {
         @apply mt-6;
         @apply grid;
         @apply grid-cols-1;

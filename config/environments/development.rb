@@ -70,4 +70,6 @@ Rails.application.configure do
 
   # config.hosts << "included-gobbler-engaged.ngrok-free.app"
 	config.hosts << "minnow-probable-apparently.ngrok-free.app"
+
+  config.assets.debug = true
 end

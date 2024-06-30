@@ -10,43 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_060215) do
-  create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_06_26_021610) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
+  enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
     t.string "street1"
     t.string "street2"
     t.string "city"
     t.string "state"
     t.string "zipcode"
-    t.string "country"
+    t.string "country", default: "US"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "rents", charset: "utf8mb4", force: :cascade do |t|
-    t.string "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.float "bedrooms"
-    t.float "baths"
-    t.string "building_type"
-    t.float "market_value"
-    t.float "zillow_mean"
-    t.float "mean"
-    t.float "median"
-    t.float "min"
-    t.float "max"
-    t.float "percentile_25"
-    t.float "percentile_75"
-    t.float "std_dev"
-    t.string "rentometer_token"
-    t.string "rentometer_quickview_url"
-    t.string "rentometer_pro_report_url"
-    t.string "rentometer_nearby_comps_url"
-    t.float "average_daily_rate"
-    t.float "occupancy"
+  create_table "properties", force: :cascade do |t|
+    t.string "property_type"
+    t.float "property_tax_rate"
+    t.float "num_beds"
+    t.float "num_baths"
+    t.integer "year_built"
+    t.float "living_area"
+    t.float "lot_area"
+    t.float "sale_price"
+    t.float "sale_estimate"
+    t.float "monthly_hoa"
+    t.float "monthly_insurance"
+    t.string "zillow_id"
+    t.string "zillow_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "address_id", null: false
+    t.index ["address_id"], name: "index_properties_on_address_id"
+  end
+
+  create_table "statistics", force: :cascade do |t|
+    t.float "monthly_min_rent"
+    t.float "monthly_max_rent"
+    t.float "monthly_median_rent"
+    t.float "avg_daily_rate"
+    t.float "occupancy_rate"
     t.float "projected_revenue"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "property_id", null: false
+    t.index ["property_id"], name: "index_statistics_on_property_id"
   end
 
+  add_foreign_key "properties", "addresses"
+  add_foreign_key "statistics", "properties"
 end

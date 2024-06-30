@@ -2,5 +2,6 @@
   "dependencies": {
     "@gojob/google-place": "^1.8.0",
     "mortgage-calculator": "^1.1.2"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
