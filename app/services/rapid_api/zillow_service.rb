@@ -69,11 +69,18 @@ class RapidApi::ZillowService
 			return property
 		end
 
-		url = "https://#{RAPID_API_ZILLOW_HOST}/property?address=#{CGI.escape(address)}"
-		raw_response = HTTParty.get(url, headers: @headers)
-		response = JSON.parse(raw_response.body, symbolize_names: true)
-		@logger.debug("get_property_by_address response: #{response}")
-		raise RapidApiError.new('bad response') if response.nil?
+		response = nil
+		begin
+			response = get_property_search("address=#{CGI.escape(address)}")
+		rescue RapidApiError => e
+			# USE CASE: handle zillow bug where ridge becomes rdge
+			if normalized_address[:street1].include? 'Ridge'
+				address.gsub!('Ridge', 'Rdge')
+				normalized_address = Address.transform(address)
+				@logger.debug("re-normalized address: #{normalized_address}")
+				response = get_property_search("address=#{CGI.escape(address)}")
+			end
+		end
 
 		create_property(response, normalized_address)
 	end
@@ -87,12 +94,7 @@ class RapidApi::ZillowService
 			return property
 		end
 
-		url = "https://#{RAPID_API_ZILLOW_HOST}/property?zpid=#{zillow_id}"
-		raw_response = HTTParty.get(url, headers: @headers)
-		response = JSON.parse(raw_response.body, symbolize_names: true)
-		@logger.debug("get_property_by_zillow_id response: #{response}")
-		raise RapidApiError.new('bad response') if response.nil?
-
+		response = get_property_search("zpid=#{zillow_id}")
 		address = "#{response[:address][:streetAddress]}, #{response[:address][:city]}, #{response[:address][:state]} #{response[:address][:zipcode]}}"
 		normalized_address = Address.transform(address)
 		@logger.debug("normalized address: #{normalized_address}")
@@ -125,7 +127,7 @@ class RapidApi::ZillowService
 		Rails.logger.info("params: #{params}")
 
 		properties = []
-		response = get_extended_search(params)
+		response = get_property_extended_search(params)
 		total_pages = response[:totalPages]
 		results_per_page = response[:resultsPerPage]
 		total_count = response[:totalResultCount]
@@ -142,7 +144,7 @@ class RapidApi::ZillowService
 			if page > 0
 				params.gsub!("page=#{page}", "page=#{page + 1}")
 				Rails.logger.info("params: #{params}")
-				response = get_extended_search(params)
+				response = get_property_extended_search(params)
 				results = response[:props]
 				Rails.logger.info("results: #{results}")
 			end
@@ -175,7 +177,7 @@ class RapidApi::ZillowService
 		raw_response = HTTParty.get(url, headers: @headers)
 		response = JSON.parse(raw_response.body, symbolize_names: true)
 		@logger.debug("populate_sales_estimates response: #{response}")
-		raise RapidApiError.new('bad response') if response.nil?
+		raise RapidApiError.new('bad response') unless response.present?
 
 		property.update!(sale_estimate: response.last[:v].to_i)
 	end
@@ -194,7 +196,7 @@ class RapidApi::ZillowService
 		raw_response = HTTParty.get(url, headers: @headers)
 		response = JSON.parse(raw_response.body, symbolize_names: true)
 		@logger.debug("populate_rent_estimates response: #{response}")
-		raise RapidApiError.new('Bad response') if response.nil?
+		raise RapidApiError.new('Bad response') unless response.present?
 
 		median = (response[:median] || 0).to_i
 		min = (response[:lowRent] || 0).to_i
@@ -217,7 +219,7 @@ class RapidApi::ZillowService
 		raw_response = HTTParty.get(url, headers: @headers)
 		response = JSON.parse(raw_response.body, symbolize_names: true)
 		@logger.debug("get_rent_estimate_history response: #{response}")
-		raise RapidApiError.new('Bad response') if response.nil?
+		raise RapidApiError.new('Bad response') unless response.present?
 
 		response[:chartData] && response[:chartData].last&.fetch(:points)&.last&.fetch(:y)&.to_i || 0
 	end
@@ -262,12 +264,23 @@ class RapidApi::ZillowService
 		end
 	end
 
-	def get_extended_search(params)
+	def get_property_extended_search(params)
 		url = "https://#{RAPID_API_ZILLOW_HOST}/propertyExtendedSearch?#{params}"
 		raw_response = HTTParty.get(url, headers: @headers)
 		response = JSON.parse(raw_response.body, symbolize_names: true)
-		@logger.debug("get_extended_search response: #{response}")
-		raise RapidApiError.new('bad response') if response.nil?
+		@logger.debug("get_property_extended_search response: #{response}")
+		raise RapidApiError.new('bad response') unless response.present?
+
+		response
+	end
+
+	def get_property_search(params)
+		url = "https://#{RAPID_API_ZILLOW_HOST}/property?#{params}"
+		raw_response = HTTParty.get(url, headers: @headers)
+		response = JSON.parse(raw_response.body, symbolize_names: true)
+		@logger.debug("get_property_search response: #{response}")
+		raise RapidApiError.new('bad response') unless response.present?
+
 		response
 	end
 end

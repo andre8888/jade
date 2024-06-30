@@ -11,7 +11,7 @@ class RapidApi::AirdnaService
 	def initialize(debug = false)
 		@debug = debug
 		@logger = Logger.new(STDOUT)
-		@logger.level = @debug? Logger::DEBUG : Logger::INFO
+		@logger.level = @debug ? Logger::DEBUG : Logger::INFO
 		@headers = {
 			'X-RapidAPI-Key' => RAPID_API_AIRDNA_TOKEN,
 			'X-RapidAPI-Host' => RAPID_API_AIRDNA_HOST
@@ -34,7 +34,7 @@ class RapidApi::AirdnaService
 		raw_response = HTTParty.get(url, headers: @headers)
 		response = JSON.parse(raw_response.body, symbolize_names: true)
 		@logger.debug("populate_adr_rate response: #{response}")
-		raise RapidApiError.new('bad response') if response.nil?
+		raise RapidApiError.new('bad response') unless response.present?
 
 		average_daily_rate = response[:data][:property_stats][:adr][:ltm].to_i
 		occupancy = response[:data][:property_stats][:occupancy][:ltm].to_f

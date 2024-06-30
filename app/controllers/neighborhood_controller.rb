@@ -26,16 +26,16 @@ class NeighborhoodController < ApplicationController
 		@properties = []
 
 		# seed property data
-		if @filter.location == 'Gatlinburg, TN, USA'
-			data = File.read "neighborhood.json"
-			data_hash = JSON.parse(data)
-			results = data_hash['props']
-			results.each do | row |
-				property = zillow_service.get_property_by_zillow_id(row['zpid'])
-				Rails.logger.info("Seed Neighborhood - found property: #{property}")
-				@properties.push(property) if property.present?
-			end
-		end
+		# if @filter.location == 'Gatlinburg, TN, USA'
+		# 	data = File.read "neighborhood.json"
+		# 	data_hash = JSON.parse(data)
+		# 	results = data_hash['props']
+		# 	results.each do | row |
+		# 		property = zillow_service.get_property_by_zillow_id(row['zpid'])
+		# 		Rails.logger.info("Seed Neighborhood - found property: #{property}")
+		# 		@properties.push(property) if property.present?
+		# 	end
+		# end
 
 		if @properties.empty?
 			begin
